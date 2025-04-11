@@ -1,8 +1,12 @@
+import {Landin} from "./pages/index.js";
+import {Header, Footer} from "./layout/index.js";
 function App() {
 
   return (
-    <div className="bg-gray-900 min-h-screen flex items-center justify-center">
-      <h1 className="text-amber-300 text-8xl">Hello World</h1>
+    <div className="bg-gray-900 min-h-screen flex flex-col items-center justify-center">
+      <Header />
+      <Landin />
+      <Footer />
     </div>
   )
 }

@@ -1,8 +1,13 @@
 import React from 'react'
+import { Hero, About, Teams } from '../section'
 
 const Landin = () => {
   return (
-    <div>Landin Page</div>
+    <> 
+      <Hero />
+      <About />
+      <Teams />
+    </>
   )
 }
 
