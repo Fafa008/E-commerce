@@ -2,7 +2,7 @@ import React from 'react'
 import { Canvas } from '@react-three/fiber'
 import Scene from './Scene'
 
-const canvasWrapper = () => {
+const CanvasWrapper = () => {
   return (
     <Canvas>
       <Scene />
@@ -10,4 +10,4 @@ const canvasWrapper = () => {
   )
 }
 
-export default canvasWrapper
+export default CanvasWrapper
