@@ -31,8 +31,8 @@ function App() {
         <Route path="/customizer" element={<Custimizer />} />
         <Route path="/ecomerce" element={<Ecomerce />} />
       </Routes>
+  
   );
 }
 
 export default App;
-// import React from 'react'
