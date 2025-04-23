@@ -1,9 +1,17 @@
 import React from 'react'
+import { OrbitControls } from '@react-three/drei'
 
-const OrbitControls = () => {
+const OrbitControlsWarper = () => {
   return (
-    <div>OrbitControls</div>
+    <OrbitControls
+    enablePan={true}
+    enableZoom={true}
+    enableRotate={true}
+    zoomSpeed={0.6}
+    panSpeed={0.5}
+    rotateSpeed={0.4}
+  />
   )
 }
 
-export default OrbitControls
+export default OrbitControlsWarper

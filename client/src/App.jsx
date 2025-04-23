@@ -1,5 +1,4 @@
 import { Landin, Ecomerce, Custimizer } from "./pages/index.js";
-import { Header, Footer } from "./layout/index.js";
 import { useEffect } from "react";
 import Lenis from '@studio-freight/lenis';
 import { Route, Routes } from "react-router-dom";
