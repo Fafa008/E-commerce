@@ -7,11 +7,11 @@ import { Shirt } from './objects'
 
 const CanvasWrapper = () => {
   return (
-    <Canvas>
+    <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <ambientLight intensity={0.5} />
       {/* <Scene /> */}
-      <Shirt position={[0, -1, 0]} />
+      <Shirt position={[0, 0, 0]} />
       <OrbitControlsWarper />
     </Canvas>
   )

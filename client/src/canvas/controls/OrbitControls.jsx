@@ -10,7 +10,9 @@ const OrbitControlsWarper = () => {
     zoomSpeed={0.6}
     panSpeed={0.5}
     rotateSpeed={0.4}
-  />
+    minDistance={0.5}
+    maxDistance={1}
+ />
   )
 }
 
