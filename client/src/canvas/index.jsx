@@ -11,7 +11,7 @@ const CanvasWrapper = () => {
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <ambientLight intensity={0.5} />
       {/* <Scene /> */}
-      <Shirt position={[0, 0, 0]} />
+      <Shirt />
       <OrbitControlsWarper />
     </Canvas>
   )

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import CanvasWrapper from '../canvas'
+import ShirtCustomizer from '../canvas/shirtcustomizer'
+import FabricTextEditor from '../components/fabric'
 
 const Customizer = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
@@ -15,7 +17,7 @@ const Customizer = () => {
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="mb-2 text-black"
         >
-          {isSidebarOpen ? '<' : '>'}
+          {isSidebarOpen ? 'X' : 'O'}
         </button>
 
         {isSidebarOpen && (
@@ -51,6 +53,7 @@ const Customizer = () => {
         <button className="p-3 bg-red-500 text-white rounded hover:bg-red-600">
           Exporter
         </button>
+        <FabricTextEditor />
       </div>
     </div>
   )
