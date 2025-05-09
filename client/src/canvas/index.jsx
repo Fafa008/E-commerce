@@ -10,7 +10,6 @@ const CanvasWrapper = () => {
     <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <ambientLight intensity={0.5} />
-      {/* <Scene /> */}
       <Shirt />
       <OrbitControlsWarper />
     </Canvas>

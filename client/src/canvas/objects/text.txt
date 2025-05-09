@@ -1,0 +1,103 @@
+import React, { useEffect, useState } from 'react'
+import { useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
+
+const Shirt = ({ baseTexture, logoTexture, text, textColor = "#FF0000", textFont = "bold 60px Arial" }) => {
+  const { nodes, materials } = useGLTF('/scene.gltf')
+  const [finalTexture, setFinalTexture] = useState()
+  
+  useEffect(() => {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    canvas.width = 1024
+    canvas.height = 1024
+
+    // 1. Dessiner le fond de debug en premier
+    ctx.fillStyle = 'rgba(255, 0, 0, 1)' // Opacité augmentée à 30%
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    // 2. Chargement de la texture de base (si fournie)
+    const loadBaseTexture = async () => {
+      if (!baseTexture) return Promise.resolve()
+      
+      return new Promise((resolve) => {
+        const img = new Image()
+        img.onload = () => {
+          // Appliquer le flip vertical uniquement pour la texture de base
+          ctx.save()
+          ctx.translate(0, canvas.height)
+          ctx.scale(1, -1)
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+          ctx.restore()
+          resolve()
+        }
+        img.src = baseTexture
+      })
+    }
+
+    // 3. Chargement du logo (si fourni)
+    const loadLogo = async () => {
+      if (!logoTexture) return Promise.resolve()
+
+      return new Promise((resolve) => {
+        const img = new Image()
+        img.onload = () => {
+          const logoSize = canvas.width / 4
+          ctx.drawImage(img, 
+            canvas.width - logoSize - 50, 
+            50, 
+            logoSize, 
+            logoSize
+          )
+          ctx.setActiveObjects([img])
+          ctx.save()
+          resolve()
+        }
+        img.src = logoTexture
+      })
+    }
+
+    // 4. Pipeline de chargement
+    const loadAll = async () => {
+      await loadBaseTexture()
+      await loadLogo()
+      
+      // Ajouter le texte
+      if (text) {
+        ctx.fillStyle = textColor
+        ctx.font = textFont
+        ctx.textAlign = "center"
+        ctx.textBaseline = "middle"
+        ctx.fillText(text, canvas.width/2, canvas.height/2)
+      }
+
+      // Créer la texture finale
+      const texture = new THREE.CanvasTexture(canvas)
+      texture.flipY = false
+      setFinalTexture(texture)
+    }
+
+    loadAll().catch(console.error)
+
+  }, [baseTexture, logoTexture, text, textColor, textFont])
+
+  
+  useEffect(() => {
+    if (finalTexture && materials.lambert1) {
+      materials.lambert1.map = finalTexture
+      materials.lambert1.needsUpdate = true
+    }
+  }, [finalTexture, materials])
+  
+  return (
+    <group>
+      <mesh
+        geometry={nodes.Object_4.geometry}
+        material={materials.lambert1}
+      />
+    </group>
+  )
+}
+
+useGLTF.preload('/scene.gltf')
+export default Shirt
